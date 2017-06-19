@@ -1,0 +1,18 @@
+rails g model Product 
+rails g model Order
+rails g controller Products
+rails g controller Order
+
+#go and change the migrate.rb files eg t.text :description etc.
+
+rails g model Inventory
+rails g controller Inventorys
+
+rails g ProductOrder
+rails g model ProductOrder
+rails g controller ProductOrders
+rails g model ProductImage
+rails g model ShoppingCart
+
+rake db:create
+rake db:migrate
