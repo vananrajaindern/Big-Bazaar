@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+
+Steps behind the creation of the app.
+
+1. rails new bigbazaar --database=postgresql -T
+2. Add Devise gem in gemfile
+3. Run bundle
+4. git remote add origin https://github.com/vananrajaindern/Big-Bazaar.git
