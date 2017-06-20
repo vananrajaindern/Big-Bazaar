@@ -16,3 +16,11 @@ rails g model ShoppingCart
 
 rake db:create
 rake db:migrate
+
+
+Rails g devise:install
+Rails g devise User
+Rails db:create
+Rails g devise:views
+
+create the fb sign in via https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
