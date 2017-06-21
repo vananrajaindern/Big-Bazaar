@@ -1,0 +1,24 @@
+
+ <% if flash[:notice] %>
+ <div class="alert alert-warning" role="alert" style="border: solid 1px red;padding: 5px; color: red;border-radius: 3px; background-color: #ed7b7b">
+  <%= flash[:notice] %>
+</div>
+<br />
+<% end %>
+<h1> Books on Sale </h1>
+
+  <table>
+    <thead>
+      <tr>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Category</td>
+      </tr>
+    </thead>
+    <% @products.each do |product| %>
+    <tr>
+      <td><%= product.title %></td>
+      <td><%= product.description %></td>
+      <td><%= product.category %></td>
+      </tr>
+    <% end %>
