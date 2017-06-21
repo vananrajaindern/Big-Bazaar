@@ -9,6 +9,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, omniauth_providers: [:facebook]
 
+  has_many :order, class_name: => "Order"
+  
+  has_one :shoppingcart, class_name: => "ShoppingCart"
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
