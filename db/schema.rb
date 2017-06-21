@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20170620054959) do
     t.string "last_name"
     t.string "tel"
     t.string "address"
+    t.boolean "role"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

@@ -1,18 +1,42 @@
 
- <% if flash[:notice] %>
- <div class="alert alert-warning" role="alert" style="border: solid 1px red;padding: 5px; color: red;border-radius: 3px; background-color: #ed7b7b">
+<% if flash[:notice] %>
+<div class="alert alert-warning" role="alert" style="border: solid 1px red;padding: 5px; color: red;border-radius: 3px; background-color: #ed7b7b">
   <%= flash[:notice] %>
 </div>
 <br />
 <% end %>
-<h1> Books on Sale </h1>
 
-  <table>
+
+<% if current_user.nil? or current_user.role.nil? %>
+
+<h1> Books on Sale </h1>
+<table class='table'>
+  <thead>
+    <tr>
+      <td>Title</td>
+      <td>Description</td>
+      <td>Category</td>
+    </tr>
+  </thead>
+  <% @products.each do |product| %>
+  <tr>
+    <td><%= product.title %></td>
+    <td><%= product.description %></td>
+    <td><%= product.category %></td>
+  </tr>
+  <% end %>
+
+  <% elsif current_user.role == true %>
+  <h1> Admin Page </h1>
+  <%= link_to 'New Product', new_product_path %>
+  <table class="table table-inverse">
     <thead>
       <tr>
         <td>Title</td>
         <td>Description</td>
         <td>Category</td>
+        <td></td>
+        <td></td>
       </tr>
     </thead>
     <% @products.each do |product| %>
@@ -20,5 +44,8 @@
       <td><%= product.title %></td>
       <td><%= product.description %></td>
       <td><%= product.category %></td>
-      </tr>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
+      <td><%= link_to 'Delete', product_path(product), method: :delete, data:{confirm: "Confirm?"}%></td>
+    </tr>
+    <% end %>
     <% end %>

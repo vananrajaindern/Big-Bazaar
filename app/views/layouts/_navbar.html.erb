@@ -1,9 +1,14 @@
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Shopping Cart</a></li>
-  <li role="presentation"><a href="#">Products</a></li>
+  <li role="presentation" class="active"><%= link_to "Home", root_path, class: 'navbar-link item'   %></li>
+  <li role="presentation"><a href="">Profile</a></li>
+  <li role="presentation"><a href="">Shopping Cart</a></li>
+  <li role="presentation"><a href="products/">Products</a></li>
   
-  <li role="presentation"><a href="sign_in">Login</a></li>
+  <% if current_user ==nil %>
+  <li role="presentation"><a href="users/sign_in">Login</a></li>
+  <% else %>
+  <li role="presentation"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link item'   %></li>
   
+  <% end %>
+
 </ul>
