@@ -1,8 +1,8 @@
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><%= link_to "Home", root_path, class: 'navbar-link item'   %></li>
-  <li role="presentation"><a href="">Profile</a></li>
+  <li role="presentation"><%= link_to 'Profile', edit_user_registration_path %></li>
   <li role="presentation"><a href="">Shopping Cart</a></li>
-  <li role="presentation"><a href="products/">Products</a></li>
+  <li role="presentation"><%= link_to "Products", root_path %></li>
   
   <% if current_user ==nil %>
   <li role="presentation"><a href="users/sign_in">Login</a></li>
@@ -10,5 +10,7 @@
   <li role="presentation"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link item'   %></li>
   
   <% end %>
-
+  <li role="presentation">
+  <div class="cart-text"><%= render 'layouts/cart_text' %></div>
+  </li>
 </ul>

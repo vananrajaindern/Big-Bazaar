@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
   resources :products
+  resources :shoppingcarts
+  resources :orders
+  resources :product_orders , only: [:create, :update, :destroy]
+  
   root 'products#index'
   
   #devise_scope :user do

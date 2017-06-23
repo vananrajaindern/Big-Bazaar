@@ -17,25 +17,35 @@ ActiveRecord::Schema.define(version: 20170620054959) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "qty"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_inventories_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.text "orderstatus"
     t.text "paymentstatus"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "product_images", force: :cascade do |t|
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
   create_table "product_orders", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "product_id"
+    t.integer "shopping_cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["product_id"], name: "index_product_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -47,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170620054959) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,4 +86,8 @@ ActiveRecord::Schema.define(version: 20170620054959) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "inventories", "products"
+  add_foreign_key "product_images", "products"
+  add_foreign_key "product_orders", "orders"
+  add_foreign_key "product_orders", "products"
 end
