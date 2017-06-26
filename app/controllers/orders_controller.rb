@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   end
   
   def index
+    @orders=ProductOrder.joins(:ShoppingCart)
+    
   end
   
   def create 

@@ -1,0 +1,22 @@
+  <% @products = @products.page(params[:page]).per_page(5)%>
+  <% @products.each do |product| %>
+<div class="row">
+  <div class="col-mid-3">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3><%= product.title %></h3>
+        <p>Description: <%= product.description %></p>
+        <p>Category: <%= product.category %></p>
+        <%= form_for @order_item do |f| %>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <% current_order %>
+          <%= f.hidden_field :shopping_cart_id, value: session[:cartid] %>
+          <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+        <% end %>
+       </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= paginate @products %>
+<%= page_entries_info @products %>

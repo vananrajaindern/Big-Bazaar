@@ -4,9 +4,8 @@ class ProductOrdersController < ApplicationController
  def create
   @order = Order.new(user_id: current_user.id)
   @order.save!
-  @productorder = ProductOrder.new(order_id: @order.id, shopping_cart_id: params[:product_order][:shopping_cart_id],product_id: params[:product_order][:product_id])
+  @productorder = ProductOrder.new(user_id: current_user.id, order_id: @order.id, shopping_cart_id: params[:product_order][:shopping_cart_id],product_id: params[:product_order][:product_id])
   @productorder.save!
-  #session[:cartid] = @order.id
   redirect_to root_path
   
 end

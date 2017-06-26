@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  
 
   def new
     @products = Product.new
@@ -19,15 +20,25 @@ class ProductsController < ApplicationController
     @products = Product.find(params[:id])
   end
 
+  def update
+    set_photo
+    if @products.update_attributes(product_params)
+      redirect_to product_path(@products)
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @products=Product.find(params[:id]).destroy
-    redirect_to products_index_path
+    redirect_to root_path
   end
 
   def index
     @user = current_user
     @order_item = ProductOrder.new
     @products = Product.all.order('created_at DESC')
+
   end
 
   def show
@@ -36,7 +47,11 @@ class ProductsController < ApplicationController
 
   private
 
+  def set_photo
+    @products = Product.find(params[:id])
+  end
+
   def product_params
-    params.require(:product).permit(:category, :title, :description)
+    params.require(:product).permit(:category, :title, :description, :image)
   end
 end

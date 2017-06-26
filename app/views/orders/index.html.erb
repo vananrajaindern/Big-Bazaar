@@ -1,0 +1,13 @@
+  <% @orders.each do |order| %>
+<div class="row">
+  <div class="col-mid-3">
+    <div class="thumbnail">
+      <div class="caption">
+        <p>ID: <%= order.id %></p>
+          <%= f.label :product_id, value: order.product_id %>
+          <%= f.label :order_id, value: order.order_id %>
+       </div>
+      </div>
+    </div>
+  </div>
+<% end %>

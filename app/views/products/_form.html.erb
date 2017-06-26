@@ -1,5 +1,5 @@
   <p>
-  <%= simple_form_for @products do |f| %>
+  <%= simple_form_for @products, :html =>{:multipart => true } do |f| %>
 
     <div class='form-group'>
       Title: <%= f.text_field :title %><br/>
@@ -13,6 +13,9 @@
      Book Description: <%= f.text_area :description , as: :text, class: "form-control" %><br/>
     </div>
 
+     <div class='form-group'>
+     <%= f.file_field :image %><br/>
+    </div>
 
     <%= f.button :submit, class: 'btn btn-outlined btn-theme btn-lg' %>
   <% end %>
