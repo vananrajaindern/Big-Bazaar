@@ -12,6 +12,7 @@
     There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
   </p>
 <% else %>
+<h2>Books in Cart </h2>
   <% @order_items.each do |order_item| %>
     <%= render 'cart_row', product: order_item.product_id, order_item: order_item %>
   <% end %>

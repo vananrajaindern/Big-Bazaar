@@ -21,6 +21,7 @@
     <div class="thumbnail">
       <div class="caption">
         <h3><%= product.title %></h3>
+        <%= image_tag ProductImage.find(product.id).image.url.to_s, size: "140x140",class: "img-thumbnail" %>
         <p>Description: <%= product.description %></p>
         <p>Category: <%= product.category %></p>
         <%= form_for @order_item do |f| %>

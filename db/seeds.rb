@@ -15,6 +15,11 @@
   cat = Faker::Book.genre
   
   Product.create(title: title, description: desc, category: cat)
+
+end
+
+Product.all.each do |p|
+  ProductImage.create(product: p)
 end
 
 #Create Admin User

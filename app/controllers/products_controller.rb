@@ -22,7 +22,8 @@ class ProductsController < ApplicationController
 
   def update
     set_photo
-    if @products.update_attributes(product_params)
+    @productimage=ProductImage.find(params[:id])
+    if @products.update_attributes(product_params) and @productimage.update_attributes(photo_params)
       redirect_to product_path(@products)
     else
       render :edit
@@ -42,7 +43,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products= Product.find[params[:id]]
+    @products= Product.find(params[:id])
   end
 
   private
@@ -52,6 +53,12 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:category, :title, :description, :image)
+    params.require(:product).permit(:category, :title, :description)
+
   end
+
+  def photo_params
+    params.require(:product).permit(:image)
+  end
+
 end
