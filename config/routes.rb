@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :shoppingcarts
   resources :orders
   resources :product_orders , only: [:create, :update, :destroy]
-  
+  resource :payments , only: [:new, :create,:show]
+
   root 'products#index'
   
   #devise_scope :user do
