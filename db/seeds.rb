@@ -14,6 +14,21 @@
   desc= Faker::Lorem.sentence 
   cat = Faker::Book.genre
   
-
   Product.create(title: title, description: desc, category: cat)
 end
+
+#Create Admin User
+for i in (1..2)
+
+  # Create admin user
+  email = "admin" + i.to_s + "@demo.com"
+  password = "password"
+  first_name = "Demo" + i.to_s
+  last_name = Faker::Name.last_name
+  is_admin = true
+
+  User.create(email: email, password: password, password_confirmation: password,
+   role: is_admin, first_name: first_name, last_name: last_name)
+
+end
+

@@ -8,6 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :last_name
       t.string :tel
       t.string :address
+      t.boolean :role
 
 
       ## Recoverable

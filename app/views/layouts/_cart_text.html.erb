@@ -1,0 +1,1 @@
+<%= link_to "#{ProductOrder.where(shopping_cart_id: session[:cartid]).count} Items in Cart", shoppingcart_path(session[:cartid]), class: "btn btn-link" %>
