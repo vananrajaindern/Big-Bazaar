@@ -6,9 +6,9 @@
           </div>
           <div class="menu">
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><%= link_to "Home", root_path, class: 'navbar-link item'   %></li>
+              <li role="presentation" class="active"><%= link_to "Home", root_path, class: 'navbar-link item' %></li>
               <li role="presentation"><%= link_to 'Profile', edit_user_registration_path %></li>
-              <li role="presentation"><%= link_to 'Order', orders_path %></li>
+              <li role="presentation"><%= link_to 'Order', product_orders_path %></li>
               <li role="presentation"><%= link_to "Products", root_path %></li>
 
               <% if current_user ==nil %>

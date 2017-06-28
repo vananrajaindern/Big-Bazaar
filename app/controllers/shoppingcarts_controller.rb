@@ -15,6 +15,7 @@ class ShoppingcartsController < ApplicationController
   def show
     @order_items = ProductOrder.where(shopping_cart_id: session[:cartid]) 
     @order=@order_items.pluck(:order_id)
+    @totalprice=0
     #Order.find(ProductOrder.find_by(shopping_cart_id: 1)[:order_id])
  end
 

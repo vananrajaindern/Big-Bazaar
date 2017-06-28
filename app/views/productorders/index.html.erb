@@ -1,0 +1,6 @@
+<% if current_user.nil? or current_user.role.nil? %>
+<h2><%= current_user.name %></h2>
+
+<% elsif current_user.role == true %>
+<h2> Admin Page </h2>
+<% end %>

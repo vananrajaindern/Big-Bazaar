@@ -13,6 +13,11 @@ end
 def new
 end
 
+def index
+  @currentOrder=ProductOrder.where(user_id: current_user.id).group(shopping_cart_id)
+  @allorders=ProductOrder.all.group(shopping_cart_id)
+end
+
 def update
   @order = current_order
   @order_item = @order.order.find(params[:id])
@@ -22,10 +27,8 @@ end
 
 def destroy
   @order = current_order
- # @order_item = @order.find(params[:id])
   @order.destroy
   redirect_to shoppingcart_path(session[:cartid])
- # @order_items = @order.order
 end
 
 private

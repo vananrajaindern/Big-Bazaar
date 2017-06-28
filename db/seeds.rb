@@ -13,8 +13,8 @@
   title = Faker::Book.title
   desc= Faker::Lorem.sentence 
   cat = Faker::Book.genre
-  
-  Product.create(title: title, description: desc, category: cat)
+  price= Faker::Number.decimal(2)
+  Product.create(title: title, description: desc, category: cat, price: price)
 
 end
 
