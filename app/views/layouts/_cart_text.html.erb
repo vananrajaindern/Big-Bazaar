@@ -1,1 +1,3 @@
-<%= link_to "#{ProductOrder.where(shopping_cart_id: session[:cartid]).count} Items in Cart", shoppingcart_path(session[:cartid]), class: "btn btn-link" %>
+<% @allorderscount=ProductOrder.where(shopping_cart_id: session[:cartid]).map(&:order).select{ |f| f.orderstatus !='Paid' } %>
+
+<%= link_to "#{@allorderscount.count} Items in Cart", shoppingcart_path(session[:cartid]), class: "btn btn-link" %>

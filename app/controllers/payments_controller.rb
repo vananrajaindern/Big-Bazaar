@@ -11,6 +11,9 @@ class PaymentsController < ApplicationController
 
   def new
     @client_token = Braintree::ClientToken.generate
+    @total= params[:totalprice]
+
+
   end
 
   def show
@@ -19,6 +22,9 @@ class PaymentsController < ApplicationController
   end
 
   def create
+   @cart=ProductOrder.where(shopping_cart_id: session[:cartid]).map(&:order).select{ |f| f.orderstatus !='Paid' }
+   
+
     amount = params["amount"] # In production you should not take amounts directly from clients
     nonce = params["payment_method_nonce"]
 
@@ -28,15 +34,26 @@ class PaymentsController < ApplicationController
       :options => {
         :submit_for_settlement => true
       }
-    )
+      )
 
     if result.success? || result.transaction
-      redirect_to payments_path(id: result.transaction.id)
+      redirect_to payment_path(id: result.transaction.id)
+      
+      @cart.each do |f| 
+        f.update_attributes(orderstatus: 'Paid')
+      end
+      
+      mail=SalesMailer.new_sales(current_user.email,'Receipt for Your Payment','You made a transaction of $' + @total.to_s)
+      mail.deliver_now
     else
       error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
+      #mail=SalesMailer.new_sales(current_user.email,'Transaction Failed', "Your test transaction has a status of #{status}")
+
       flash[:error] = error_messages
-      redirect_to new_payments_path
+      redirect_to new_payment_path
     end
+
+    
   end
 
   def _create_result_hash(transaction)
@@ -44,9 +61,9 @@ class PaymentsController < ApplicationController
 
     if TRANSACTION_SUCCESS_STATUSES.include? status
       result_hash = {
-        :header => "Sweet Success!",
+        :header => "Congratulations Payment is completed!",
         :icon => "success",
-        :message => "Your test transaction has been successfully processed. See the Braintree API response and try again."
+        :message => "Your test transaction has been successfully processed."
       }
     else
       result_hash = {
@@ -55,5 +72,9 @@ class PaymentsController < ApplicationController
         :message => "Your test transaction has a status of #{status}. See the Braintree API response and try again."
       }
     end
+  end
+
+  def order_item_status
+    params.require(:order).permit(:order_status)
   end
 end

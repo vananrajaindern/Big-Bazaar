@@ -7,15 +7,18 @@
     </ul>
   </div>
 <% end %>
-<% if @order_items.nil? %>
+
+<% if @order_items.nil? &&  @order_items.find_by(shopping_cart_id: session[:cartid]).order[:orderstatus] != nil %>
   <p class="text-center">
     There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
   </p>
 <% else %>
 <h2>Books in Cart </h2>
   <% @order_items.each do |order_item| %>
-    <%= render 'cart_row', product: order_item.product_id, order_item: order_item %>
+    <%= render 'cart_row', product: ProductOrder.find_by(order_id: order_item.id)[:product_id], order_item: order_item %>
   <% end %>
 
  <h3>Total Price: $<%= @totalprice %></h3>
+  <%= link_to "CheckOut", new_payment_path(totalprice: @totalprice), class: "btn btn-danger" %>
 <% end %>
+

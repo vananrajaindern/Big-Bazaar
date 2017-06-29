@@ -11,6 +11,10 @@ class OrdersController < ApplicationController
   end
   
   def destroy
+
+    @order = current_order(params[:id])
+    @order.destroy
+    redirect_to shoppingcart_path(session[:cartid])
   end
 
 end

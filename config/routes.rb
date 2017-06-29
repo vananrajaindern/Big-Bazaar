@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :products
   resources :shoppingcarts
   resources :orders
-  resources :product_orders , only: [:create, :update, :destroy]
-  resource :payments , only: [:new, :create,:show]
+  resources :product_orders , only: [:create, :update, :destroy, :index]
+  resources :payments 
 
   root 'products#index'
   

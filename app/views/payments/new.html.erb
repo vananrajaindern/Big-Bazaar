@@ -9,12 +9,16 @@
         </p>
       </header>
 
+      <div>
+              
+      </div>
+
       <%= form_tag(payments_path, method: "post", id: "payment-form") do %>
         <section>
           <label for="amount">
             <span class="input-label">Amount</span>
             <div class="input-wrapper amount-wrapper">
-              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" readonly="true" value= <%= @total %>>
             </div>
           </label>
 
@@ -26,9 +30,9 @@
         <input type="hidden" id="nonce" name="payment_method_nonce" />
         <button class="button" type="submit"><span>Test Transaction</span></button>
       <% end %>
-
     </div>
   </div>
+
 </div>
 
 <script src="https://js.braintreegateway.com/web/dropin/1.2.0/js/dropin.min.js"></script>

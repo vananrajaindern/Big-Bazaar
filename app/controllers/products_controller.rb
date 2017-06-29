@@ -4,11 +4,13 @@ class ProductsController < ApplicationController
 
   def new
     @products = Product.new
+
+    @product_listing_form = ProductListingForm.new(current_user)
   end
 
   def create
-    @products = Product.create(product_params)
-
+    #@products = Product.create(product_params)
+    @product_listing_form= ProductListingForm.new(product_params)
     if @products.save
       redirect_to products_index_path
     else
@@ -53,12 +55,12 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:category, :title, :description)
+    params.require(:product_listing_form).permit(product_listing_attributes [:category, :title, :description])
 
   end
 
   def photo_params
-    params.require(:product).permit(:image)
+    params.require(:product_listing_form).permit(product_listing_attributes[:image])
   end
 
 end

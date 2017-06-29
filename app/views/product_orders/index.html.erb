@@ -1,0 +1,35 @@
+<h1>Unpaid Orders </h1>
+
+<table border=1>
+<% @allorders.each do |order| %>
+ 
+  <tr>  
+    <td> Order No</td>
+    <td> Product </td>
+    <td> Price </td>
+  </tr>
+  <tr>
+    <td><%= order.id %></td>
+    <td><%= ProductOrder.find_by(order_id: order.id).product[:title]  %></td>
+    <td><%= ProductOrder.find_by(order_id: order.id).product[:price]  %></td>
+</tr>
+
+<% end %>
+</table>
+
+<h1>Paid Orders</h1>
+<table border=1>
+<% @paidorders.each do |order| %>
+  <tr>  
+    <td> Order No</td>
+    <td> Product </td>
+    <td> Price </td>
+  </tr>
+  <tr>
+    <td><%= order.id %></td>
+    <td><%= ProductOrder.find_by(order_id: order.id).product[:title]  %></td>
+    <td><%= ProductOrder.find_by(order_id: order.id).product[:price]  %></td>
+</tr>
+<% end %>
+</table>
+
