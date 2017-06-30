@@ -7,9 +7,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :firstname, :last_name, :provider, :uid])
   end
 
-  def current_order
+  def current_order(id)
+
     if !session[:cartid].nil? #Existing Session
-      return ProductOrder.find_by(shopping_cart_id: session[:cartid])
+      return ProductOrder.find_by(shopping_cart_id: session[:cartid], order_id: id)
     else # New Session
 
       @cart=ShoppingCart.create()

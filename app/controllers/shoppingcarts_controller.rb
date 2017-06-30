@@ -13,8 +13,10 @@ class ShoppingcartsController < ApplicationController
   end
 
   def show
-    @order_items = ProductOrder.where(shopping_cart_id: session[:cartid]) 
-    @order=@order_items.pluck(:order_id)
+    @order_items = ProductOrder.where(shopping_cart_id: session[:cartid]).map(&:order).select{ |f| f.orderstatus !='Paid' }
+    #@order=@order_items.pluck(:order_id)
+    @totalprice = 0
+
     #Order.find(ProductOrder.find_by(shopping_cart_id: 1)[:order_id])
  end
 

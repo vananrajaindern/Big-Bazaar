@@ -8,9 +8,10 @@
           <%= image_tag ProductImage.find(product.id).image.url.to_s, size: "140x140",class: "img-thumbnail" %>
         <p>Description: <%= product.description %></p>
         <p>Category: <%= product.category %></p>
+        <p>Price: <%= product.price %></p>
         <%= form_for @order_item do |f| %>
           <%= f.hidden_field :product_id, value: product.id %>
-          <% current_order %>
+          <% current_order(@order_item.id) %>
           <%= f.hidden_field :shopping_cart_id, value: session[:cartid] %>
           <%= f.submit "Add to Cart", class: "btn btn-primary" %>
         <% end %>

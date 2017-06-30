@@ -1,0 +1,50 @@
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Unpaid Orders</div>
+
+  <!-- Table -->
+  <table class="table">
+
+
+    <tr>  
+      <td> Order No</td>
+      <td> Book Title </td>
+      <td> Price </td>
+    </tr>
+        <% @allorders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= ProductOrder.find_by(order_id: order.id).product[:title]  %></td>
+      <td><%= ProductOrder.find_by(order_id: order.id).product[:price]  %></td>
+    </tr>
+
+    <% end %>
+
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Paid Orders</div>
+
+  <!-- Table -->
+  <table class="table">
+    <tbody>
+  
+  <tr>  
+    <td> Order No</td>
+    <td> Book Title </td>
+    <td> Price </td>
+  </tr>
+   <% @paidorders.each do |order| %>
+  <tr>
+    <td><%= order.id %></td>
+    <td><%= ProductOrder.find_by(order_id: order.id).product[:title]  %></td>
+    <td><%= ProductOrder.find_by(order_id: order.id).product[:price]  %></td>
+  </tr>
+  </tbody>
+  <% end %>
+  </table>
+</div>
+
