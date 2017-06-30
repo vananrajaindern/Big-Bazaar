@@ -43,7 +43,7 @@ class PaymentsController < ApplicationController
         f.update_attributes(orderstatus: 'Paid')
       end
       
-      mail=SalesMailer.new_sales(current_user.email,'Receipt for Your Payment','You made a transaction of $' + amount + "via " + @transaction.credit_card_details.card_type)
+      mail=SalesMailer.new_sales(current_user.email,'Receipt for Your Payment','You made a transaction of $' + amount + "via ")
       mail.deliver_now
     else
       error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
