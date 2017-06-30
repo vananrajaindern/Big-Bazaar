@@ -13,7 +13,6 @@ class ShoppingcartsController < ApplicationController
   end
 
   def show
-    byebug
     @order_items = ProductOrder.where(shopping_cart_id: session[:cartid]).map(&:order).select{ |f| f.orderstatus !='Paid' }
     #@order=@order_items.pluck(:order_id)
     @totalprice = 0

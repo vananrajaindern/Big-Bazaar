@@ -5,14 +5,14 @@ class ProductsController < ApplicationController
   def new
     @products = Product.new
 
-    @product_listing_form = ProductListingForm.new(current_user)
+    #@product_listing_form = ProductListingForm.new(current_user)
   end
 
   def create
-    #@products = Product.create(product_params)
-    @product_listing_form= ProductListingForm.new(product_params)
+    @products = Product.create(product_params)
+    #@product_listing_form= ProductListingForm.new(product_params)
     if @products.save
-      redirect_to products_index_path
+      redirect_to products_path
     else
       render :new
     end
@@ -20,13 +20,19 @@ class ProductsController < ApplicationController
 
   def edit
     @products = Product.find(params[:id])
+    #@product_listing_form = ProductListingForm.new(product_params)
   end
 
+
   def update
-    set_photo
-    @productimage=ProductImage.find(params[:id])
+    #set_photo
+    byebug
+    @productimage=ProductImage.find_by(product_id: params[:id])
     if @products.update_attributes(product_params) and @productimage.update_attributes(photo_params)
-      redirect_to product_path(@products)
+      byebug
+      redirect_to products_path
+      #redirect_to shoppingcarts_path
+      #redirect_to root_path
     else
       render :edit
     end
@@ -55,12 +61,12 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product_listing_form).permit(product_listing_attributes [:category, :title, :description])
+    params.require(:product).permit(:category, :title, :description, :price)
 
   end
 
   def photo_params
-    params.require(:product_listing_form).permit(product_listing_attributes[:image])
+    params.require(:productimage).permit(:image)
   end
 
 end
